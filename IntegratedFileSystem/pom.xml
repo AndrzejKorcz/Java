@@ -41,11 +41,6 @@
       <version>1.18.0</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>net.sf.jt400</groupId>
-      <artifactId>jt400</artifactId>
-      <version>9.7</version>
-    </dependency>
   </dependencies>
 
   <build>
