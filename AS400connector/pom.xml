@@ -5,10 +5,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.santander.ibmi</groupId>
-  <artifactId>AS400connector</artifactId>
+  <artifactId>as400connector</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>AS400connector</name>
+  <name>as400connector</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
