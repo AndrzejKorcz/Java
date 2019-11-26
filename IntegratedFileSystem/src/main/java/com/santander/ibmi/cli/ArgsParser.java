@@ -1,9 +1,11 @@
 package com.santander.ibmi.cli;
 
+import com.santander.ibmi.params.EnumParams;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.extern.java.Log;
 import org.apache.commons.cli.*;
+import org.jetbrains.annotations.NotNull;
 
 @Log
 @Builder
@@ -14,8 +16,12 @@ public class ArgsParser {
     private Options options;
 
     private Option action;
-    private Option input;
-    private Option output;
+    private Option local;
+    private Option remote;
+
+    private EnumParams.Action enumAction;
+    private String localFilePath;
+    private String remoteFilePath;
 
     private void setUpOptions() {
         options = new Options();
@@ -23,11 +29,11 @@ public class ArgsParser {
         action.setRequired(REQUIRED);
         options.addOption(action);
 
-        input.setRequired(REQUIRED);
-        options.addOption(input);
+        local.setRequired(REQUIRED);
+        options.addOption(local);
 
-        output.setRequired(REQUIRED);
-        options.addOption(output);
+        remote.setRequired(REQUIRED);
+        options.addOption(remote);
     }
 
     public boolean parseArgs(String[] args) {
@@ -44,20 +50,16 @@ public class ArgsParser {
             formatter.printHelp("ibmiifs", options);
             return false;
         }
-        processCommand(cmd);
+
+        return processCommand(cmd);
+    }
+
+    private boolean processCommand(@NotNull CommandLine cmd) {
+        localFilePath = cmd.getOptionValue("local");
+        remoteFilePath = cmd.getOptionValue("remote");
+
+        enumAction = EnumParams.Action.get(cmd.getOptionValue("action"));
 
         return true;
     }
-
-    private boolean processCommand(CommandLine cmd) {
-        String inputFilePath = cmd.getOptionValue("input");
-        String outputFilePath = cmd.getOptionValue("output");
-
-        log.info(inputFilePath);
-        log.info(outputFilePath);
-
-        return true;
-    }
-
-
 }
