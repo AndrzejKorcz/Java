@@ -1,4 +1,4 @@
-package com.santander.ibmi.utils;
+package com.standalone.ibmi.utils;
 
 import java.io.Console;
 

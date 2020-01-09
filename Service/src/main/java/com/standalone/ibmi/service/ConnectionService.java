@@ -1,8 +1,8 @@
-package com.santander.ibmi.service;
+package com.standalone.ibmi.service;
 
-import com.santander.ibmi.connector.As400Connection;
+import com.standalone.ibmi.connector.As400Connection;
 import com.santander.ibmi.scrambler.Scrambler;
-import com.santander.ibmi.utils.ConsoleSrc;
+import com.standalone.ibmi.utils.ConsoleSrc;
 import com.santander.ibmi.yaml.YamlConfigRunner;
 import com.santander.ibmi.yaml.configuration.Configuration;
 import com.santander.ibmi.yaml.constants.Constants;
@@ -33,7 +33,7 @@ public class ConnectionService {
 
     public void closeAs400Connection(As400Connection as400Connection) {
         if (as400Connection.getAs400() != null)
-            as400Connection.closeConnection();
+            as400Connection.close();
     }
 
     private void getConfig() throws IOException {

@@ -1,4 +1,4 @@
-package com.santander.ibmi.utils;
+package com.standalone.ibmi.utils;
 
 import org.junit.Before;
 import org.junit.Test;

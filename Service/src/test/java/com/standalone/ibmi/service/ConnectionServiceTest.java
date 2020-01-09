@@ -1,7 +1,7 @@
-package com.santander.ibmi.service;
+package com.standalone.ibmi.service;
 
-import com.santander.ibmi.connector.As400Connection;
-import com.santander.ibmi.utils.ConsoleSrc;
+import com.standalone.ibmi.connector.As400Connection;
+import com.standalone.ibmi.utils.ConsoleSrc;
 import com.santander.ibmi.yaml.constants.Constants;
 import org.junit.AfterClass;
 import org.junit.Test;
