@@ -1,4 +1,4 @@
-package com.santander.ibmi.scrambler;
+package com.standalone.ibmi.scrambler;
 
 public class Scrambler {
 
