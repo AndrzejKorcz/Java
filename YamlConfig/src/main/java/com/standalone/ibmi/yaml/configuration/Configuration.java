@@ -1,6 +1,6 @@
-package com.santander.ibmi.yaml.configuration;
+package com.standalone.ibmi.yaml.configuration;
 
-import com.santander.ibmi.yaml.models.Connection;
+import com.standalone.ibmi.yaml.models.Connection;
 import lombok.Getter;
 import lombok.Setter;
 

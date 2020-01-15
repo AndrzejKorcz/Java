@@ -1,7 +1,7 @@
-package com.santander.ibmi.yaml;
+package com.standalone.ibmi.yaml;
 
-import com.santander.ibmi.yaml.configuration.Configuration;
-import com.santander.ibmi.yaml.constants.Constants;
+import com.standalone.ibmi.yaml.configuration.Configuration;
+import com.standalone.ibmi.yaml.constants.Constants;
 import lombok.extern.java.Log;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;

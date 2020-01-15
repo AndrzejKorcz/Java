@@ -1,4 +1,4 @@
-package com.santander.ibmi.yaml.models;
+package com.standalone.ibmi.yaml.models;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

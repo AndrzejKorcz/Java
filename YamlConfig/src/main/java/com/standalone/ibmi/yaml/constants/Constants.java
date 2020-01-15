@@ -1,4 +1,4 @@
-package com.santander.ibmi.yaml.constants;
+package com.standalone.ibmi.yaml.constants;
 
 public class Constants {
 

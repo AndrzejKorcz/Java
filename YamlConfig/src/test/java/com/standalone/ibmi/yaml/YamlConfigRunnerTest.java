@@ -1,8 +1,8 @@
-package com.santander.ibmi.yaml;
+package com.standalone.ibmi.yaml;
 
-import com.santander.ibmi.yaml.configuration.Configuration;
-import com.santander.ibmi.yaml.constants.Constants;
-import com.santander.ibmi.yaml.models.Connection;
+import com.standalone.ibmi.yaml.configuration.Configuration;
+import com.standalone.ibmi.yaml.constants.Constants;
+import com.standalone.ibmi.yaml.models.Connection;
 import lombok.extern.java.Log;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

@@ -1,6 +1,6 @@
-package com.santander.ibmi.yaml.configuration;
+package com.standalone.ibmi.yaml.configuration;
 
-import com.santander.ibmi.yaml.models.Connection;
+import com.standalone.ibmi.yaml.models.Connection;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
