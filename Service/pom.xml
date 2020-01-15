@@ -30,7 +30,7 @@
       <version>1.18.10</version>
     </dependency>
     <dependency>
-      <groupId>com.standalone.ibmi</groupId>
+      <groupId>com.standalone.utils</groupId>
       <artifactId>scrambler</artifactId>
       <version>1.0</version>
     </dependency>

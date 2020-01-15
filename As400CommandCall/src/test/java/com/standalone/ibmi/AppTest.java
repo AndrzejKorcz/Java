@@ -1,7 +1,6 @@
-package com.santander.ibmi;
+package com.standalone.ibmi;
 
-import static org.junit.Assert.assertTrue;
-
+import com.standalone.ibmi.App;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.ExpectedSystemExit;
@@ -16,7 +15,7 @@ public class AppTest
     @Test
     public void shouldExitWithSuccess() throws IOException {
         exit.expectSystemExitWithStatus(0);
-        App.main(new String[] {"-c", "RUCRTTST TSTPGM(KORCZA03/RST000000U) SRCFILE(KORCZA03/RSTSORC)"});
+        App.main(new String[] {"-c", "dsplibl"});
     }
 
     @Test

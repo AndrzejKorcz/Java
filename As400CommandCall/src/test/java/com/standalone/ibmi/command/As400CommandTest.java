@@ -1,7 +1,8 @@
-package com.santander.ibmi.command;
+package com.standalone.ibmi.command;
 
-import com.santander.ibmi.connector.As400Connection;
-import com.santander.ibmi.service.ConnectionService;
+import com.standalone.ibmi.connector.As400Connection;
+import com.standalone.ibmi.service.ConnectionService;
+
 import lombok.extern.java.Log;
 import org.junit.Test;
 

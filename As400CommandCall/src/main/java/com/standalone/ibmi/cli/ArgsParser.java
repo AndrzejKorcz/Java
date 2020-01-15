@@ -1,12 +1,14 @@
-package com.santander.ibmi.cli;
+package com.standalone.ibmi.cli;
 
+import com.standalone.utils.LogFile;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.extern.java.Log;
 import org.apache.commons.cli.*;
 import org.jetbrains.annotations.NotNull;
 
-@Log
+import java.io.IOException;
+import java.util.logging.Level;
+
 @Builder
 @Getter
 public class ArgsParser {
@@ -24,7 +26,7 @@ public class ArgsParser {
         options.addOption(cmd);
     }
 
-    public boolean parseArgs(String[] args) {
+    public boolean parseArgs(String[] args) throws IOException {
         setUpOptions();
 
         CommandLineParser parser = new DefaultParser();
@@ -34,7 +36,7 @@ public class ArgsParser {
         try {
             commandLine = parser.parse(options, args);
         } catch (ParseException e) {
-            log.severe("Error in parameters! " + e.getMessage());
+            LogFile.writeLog(Level.SEVERE, "Error in parameters! " + e.getMessage());
             formatter.printHelp("ibmicmd", options);
             return false;
         }

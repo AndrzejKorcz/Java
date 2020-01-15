@@ -1,19 +1,19 @@
-package com.santander.ibmi;
+package com.standalone.ibmi;
 
-import com.santander.ibmi.cli.ArgsParser;
-import com.santander.ibmi.command.As400Command;
-import com.santander.ibmi.connector.As400Connection;
-import com.santander.ibmi.service.ConnectionService;
-import lombok.extern.java.Log;
+import com.standalone.ibmi.cli.ArgsParser;
+import com.standalone.ibmi.command.As400Command;
+import com.standalone.ibmi.connector.As400Connection;
+import com.standalone.ibmi.service.ConnectionService;
+import com.standalone.utils.LogFile;
 import org.apache.commons.cli.Option;
 
 import java.io.IOException;
+import java.util.logging.Level;
 
-@Log
 public class App 
 {
     public static void main( String[] args ) throws IOException {
-        log.info("Start IBMi command process");
+        LogFile.writeLog(Level.INFO, "Start IBMi command process.");
         ArgsParser argsParser = ArgsParser.builder()
                 .cmd(new Option("c", "command", true, "command(s) on IBMi IFS"))
                 .build();
@@ -33,8 +33,8 @@ public class App
         boolean result = as400Command.runCommand();
 
         connectionService.closeAs400Connection(as400Connection);
-        log.info("End IBMi command process");
 
+        LogFile.writeLog(Level.INFO, "End IBMi command process.");
         System.exit(result ? 0 : 1);
     }
 }

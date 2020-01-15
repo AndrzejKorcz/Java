@@ -1,9 +1,11 @@
-package com.santander.ibmi.cli;
+package com.standalone.ibmi.cli;
 
 import lombok.extern.java.Log;
 import org.junit.BeforeClass;
 import org.apache.commons.cli.Option;
 import org.junit.Test;
+
+import java.io.IOException;
 
 import static org.junit.Assert.*;
 
@@ -26,13 +28,13 @@ public class ArgsParserTest {
     }
 
     @Test
-    public void argsParserAnswerWithTrue() {
+    public void argsParserAnswerWithTrue() throws IOException {
         String[] args = {"-c", "command1", "command2", "command3"};
         assertTrue( "ParseArgs parameters exists", argsParser.parseArgs(args) );
     }
 
     @Test
-    public void argsParserAnswerWithTrueWithList() {
+    public void argsParserAnswerWithTrueWithList() throws IOException {
         String[] args = {"-c", "command1", "command2", "command3"};
         argsParser.parseArgs(args);
         assertTrue( "ParseArgs parameters exists and length equals 3", argsParser.getCommands().length==3 );
