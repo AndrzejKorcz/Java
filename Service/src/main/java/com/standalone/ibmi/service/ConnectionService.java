@@ -1,12 +1,12 @@
 package com.standalone.ibmi.service;
 
 import com.standalone.ibmi.connector.As400Connection;
-import com.santander.ibmi.scrambler.Scrambler;
+import com.standalone.ibmi.scrambler.Scrambler;
 import com.standalone.ibmi.utils.ConsoleSrc;
-import com.santander.ibmi.yaml.YamlConfigRunner;
-import com.santander.ibmi.yaml.configuration.Configuration;
-import com.santander.ibmi.yaml.constants.Constants;
-import com.santander.ibmi.yaml.models.Connection;
+import com.standalone.ibmi.yaml.YamlConfigRunner;
+import com.standalone.ibmi.yaml.configuration.Configuration;
+import com.standalone.ibmi.yaml.constants.Constants;
+import com.standalone.ibmi.yaml.models.Connection;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.java.Log;
