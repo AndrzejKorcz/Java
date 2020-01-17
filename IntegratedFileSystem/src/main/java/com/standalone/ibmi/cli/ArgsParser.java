@@ -1,13 +1,15 @@
-package com.santander.ibmi.cli;
+package com.standalone.ibmi.cli;
 
-import com.santander.ibmi.params.EnumParams;
+import com.standalone.ibmi.params.EnumParams;
+import com.standalone.utils.LogFile;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.extern.java.Log;
 import org.apache.commons.cli.*;
 import org.jetbrains.annotations.NotNull;
 
-@Log
+import java.io.IOException;
+import java.util.logging.Level;
+
 @Builder
 @Getter
 public class ArgsParser {
@@ -20,8 +22,8 @@ public class ArgsParser {
     private Option remote;
 
     private EnumParams.Action enumAction;
-    private String localFilePath;
-    private String remoteFilePath;
+    private String[] localFilePaths;
+    private String[] remoteFilePaths;
 
     private void setUpOptions() {
         options = new Options();
@@ -30,13 +32,15 @@ public class ArgsParser {
         options.addOption(action);
 
         local.setRequired(REQUIRED);
+        local.setArgs(Option.UNLIMITED_VALUES);
         options.addOption(local);
 
         remote.setRequired(REQUIRED);
+        remote.setArgs(Option.UNLIMITED_VALUES);
         options.addOption(remote);
     }
 
-    public boolean parseArgs(String[] args) {
+    public boolean parseArgs(String[] args) throws IOException {
         setUpOptions();
 
         CommandLineParser parser = new DefaultParser();
@@ -46,7 +50,7 @@ public class ArgsParser {
         try {
             cmd = parser.parse(options, args);
         } catch (ParseException e) {
-            log.severe("Error in parameters! " + e.getMessage());
+            LogFile.writeLog(Level.SEVERE, "Error in parameters! " + e.getMessage());
             formatter.printHelp("ibmiifs", options);
             return false;
         }
@@ -55,8 +59,8 @@ public class ArgsParser {
     }
 
     private boolean processCommand(@NotNull CommandLine cmd) {
-        localFilePath = cmd.getOptionValue("local");
-        remoteFilePath = cmd.getOptionValue("remote");
+        localFilePaths = cmd.getOptionValues("local");
+        remoteFilePaths = cmd.getOptionValues("remote");
 
         enumAction = EnumParams.Action.get(cmd.getOptionValue("action"));
 

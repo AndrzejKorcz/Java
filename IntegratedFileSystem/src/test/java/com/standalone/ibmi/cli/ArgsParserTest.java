@@ -1,9 +1,11 @@
-package com.santander.ibmi.cli;
+package com.standalone.ibmi.cli;
 
-import com.santander.ibmi.params.EnumParams;
+import com.standalone.ibmi.params.EnumParams;
 import org.apache.commons.cli.Option;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.io.IOException;
 
 import static org.junit.Assert.*;
 
@@ -39,71 +41,68 @@ public class ArgsParserTest {
     }
 
     @Test
-    public void shouldAnswerWithFalse(){
+    public void shouldAnswerWithFalse() throws IOException {
         assertFalse("ParseArgs parameters are null", argsParser.parseArgs(null));
     }
 
     @Test
-    public void shouldAnswerWithTrue()
-    {
+    public void shouldAnswerWithTrue() throws IOException {
         String[] args = {ACTION_, EnumParams.Action.CPYTOIFS.toString(), LOCAL_, LOCAL_PATH, REMOTE_, IFS_PATH};
         assertTrue( "ParseArgs parameters are not null", argsParser.parseArgs(args) );
     }
 
     @Test
-    public void shouldAnswerWithInputTrue()
-    {
+    public void shouldAnswerWithInputTrue() throws IOException {
         String[] args = {ACTION_, EnumParams.Action.CPYTOIFS.toString(), LOCAL_, LOCAL_PATH, REMOTE_, IFS_PATH};
         argsParser.parseArgs(args);
-        assertEquals(LOCAL_PATH, argsParser.getLocalFilePath());
+        String[] localFilePaths = argsParser.getLocalFilePaths();
+        assertEquals(LOCAL_PATH, localFilePaths[0]);
     }
 
     @Test
-    public void shouldAnswerWithOutputTrue()
-    {
+    public void shouldAnswerWithOutputTrue() throws IOException {
         String[] args = {ACTION_, EnumParams.Action.CPYTOIFS.toString(), LOCAL_, LOCAL_PATH, REMOTE_, IFS_PATH};
         argsParser.parseArgs(args);
-        assertEquals(IFS_PATH, argsParser.getRemoteFilePath());
+        String[] remoteFilePath = argsParser.getRemoteFilePaths();
+        assertEquals(IFS_PATH, remoteFilePath[0]);
     }
 
     @Test
-    public void shouldAnswerWithActionCpyToIfsEquals()
-    {
+    public void shouldAnswerWithActionCpyToIfsEquals() throws IOException {
         String[] args = {ACTION_, "cpyToIfs", LOCAL_, LOCAL_PATH, REMOTE_, IFS_PATH};
         argsParser.parseArgs(args);
         assertEquals(EnumParams.Action.CPYTOIFS, argsParser.getEnumAction());
     }
 
     @Test
-    public void shouldAnswerWithActionCpyFromIfsEquals()
-    {
+    public void shouldAnswerWithActionCpyFromIfsEquals() throws IOException {
         String[] args = {ACTION_, "cpyFromIfs", LOCAL_, LOCAL_PATH, REMOTE_, IFS_PATH};
         argsParser.parseArgs(args);
-        assertEquals(EnumParams.Action.CPYFROMFS, argsParser.getEnumAction());
+        assertEquals(EnumParams.Action.CPYFROMIFS, argsParser.getEnumAction());
     }
 
     @Test
-    public void optionsNotNull(){
+    public void optionsNotNull() throws IOException {
         String[] args = {};
         argsParser.parseArgs(args);
         assertNotNull("Verify that argsParser options is NOT null", argsParser.getOptions());
     }
 
     @Test
-    public void optionActionNotNull(){
-        String[] args = {ACTION_, EnumParams.Action.CPYFROMFS.toString()};
+    public void optionActionNotNull() throws IOException {
+        String[] args = {ACTION_, EnumParams.Action.CPYFROMIFS.toString()};
         argsParser.parseArgs(args);
         assertNotNull("Verify that argsParser options is NOT null", argsParser.getAction());
     }
 
     @Test
-    public void optionInputNotNull(){
+    public void optionInputNotNull() throws IOException {
         String[] args = {"-i", "path"};
         argsParser.parseArgs(args);
         assertNotNull("Verify that input option is NOT null", argsParser.getLocal());
     }
     @Test
-    public void optionOutputNotNull(){
+    public void optionOutputNotNull() throws IOException {
         String[] args = {"-o", "path"};
         argsParser.parseArgs(args);
         assertNotNull("Verify that output option is NOT null", argsParser.getRemote());

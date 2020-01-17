@@ -4,9 +4,9 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.santander.ibmi</groupId>
+  <groupId>com.standalone.ibmi</groupId>
   <artifactId>integratedfilesystem</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
 
   <name>integratedfilesystem</name>
   <url>http://www.example.com</url>
@@ -19,9 +19,14 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.santander.ibmi</groupId>
+      <groupId>com.standalone.utils</groupId>
+      <artifactId>writeLog</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.standalone.ibmi</groupId>
       <artifactId>service</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <version>1.0</version>
     </dependency>
     <dependency>
       <groupId>commons-cli</groupId>
@@ -85,7 +90,7 @@
           <configuration>
             <archive>
               <manifest>
-                <mainClass>com.santander.ibmi.App</mainClass>
+                <mainClass>com.standalone.ibmi.App</mainClass>
               </manifest>
             </archive>
             <descriptorRefs>
