@@ -82,3 +82,15 @@ ifspath=/usr/local/src/CICD
 inputPath=E:/Users/160246/IBM/rationalsdp/workspace/DevOps/RSTSORC
 outputPath=D:/DevOps/src/CICD
 ibmilib=KORCZA03
+
+
+"QDEVTOOLS/CODECOV CMD(CALL PGM(KORCZA03/APB9016T)) MODULE((KORCZA03/APB9016T *PGM *ALL)) OUTSTMF('/usr/local/src/CICD/APB9016T.cczip')" 
+
+
+CODECOV CMD(CALL PGM(KORCZA03/APB9016T)) MODULE((KORCZA03/APB9016T *PGM *ALL)) OUTSTMF('/home/KORCZA03/APB9016T.cczip')                           
+Created code coverage result file (/home/KORCZA03/APB9016T.cczip).  
+
+CODECOV CMD(RUCALLTST TSTPGM(KORCZA03/APB9016U)) MODULE((KORCZA03/APB9016U *SRVPGM *ALL)) OUTSTMF('/home/KORCZA03/APB9016T.cczip')                
+Created code coverage result file (/home/KORCZA03/APB9016T.cczip).            
+	
+	
