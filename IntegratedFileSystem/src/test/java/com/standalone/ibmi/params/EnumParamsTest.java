@@ -15,12 +15,6 @@ public class EnumParamsTest {
     }
 
     @Test
-    public void cpyFromIfsEquals() {
-        enumAction = EnumParams.Action.get("cpyFromIfs");
-        assertEquals(EnumParams.Action.CPYFROMIFS, enumAction);
-    }
-
-    @Test
     public void cpyTxtFromIfsEquals() {
         enumAction = EnumParams.Action.get("cpyTxtFromIfs");
         assertEquals(EnumParams.Action.CPYTXTFROMIFS, enumAction);
@@ -31,4 +25,5 @@ public class EnumParamsTest {
         enumAction = EnumParams.Action.get("cpyByteFromIfs");
         assertEquals(EnumParams.Action.CPYBYTEFROMIFS, enumAction);
     }
+
 }

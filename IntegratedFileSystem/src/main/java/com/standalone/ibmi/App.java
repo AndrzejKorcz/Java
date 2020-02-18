@@ -20,6 +20,7 @@ public class App
                 .action(new Option("a", "action", true, "action on IBMi IFS"))
                 .local(new Option("l", "local", true, "path to local"))
                 .remote(new Option("r", "remote", true, "path to remote"))
+                .clean(new Option("c", "clean", false, "clean objects on IBMi IFS"))
                 .build();
 
        if (!argsParser.parseArgs(args)) {
@@ -37,15 +38,14 @@ public class App
 
         LogFile.writeLog(Level.INFO, "Action: " + argsParser.getEnumAction().getActionType());
 
-        if ((argsParser.getEnumAction() == EnumParams.Action.CPYFROMIFS) ||
-           (argsParser.getEnumAction() == EnumParams.Action.CPYTXTFROMIFS) ||
-           (argsParser.getEnumAction() == EnumParams.Action.CPYBYTEFROMIFS))
-        {
-            as400ifs.readIFS(argsParser.getEnumAction());
+        if ( (argsParser.getEnumAction() == EnumParams.Action.CPYTXTFROMIFS) ||
+             (argsParser.getEnumAction() == EnumParams.Action.CPYBYTEFROMIFS) ) {
+               as400ifs.readIFS(argsParser.getEnumAction(), argsParser.getCleanUp());
         }
         else if (argsParser.getEnumAction() == EnumParams.Action.CPYTOIFS) {
             as400ifs.writeIFS();
         }
+
         connectionService.closeAs400Connection(as400Connection);
 
         LogFile.writeLog(Level.INFO, "End process work on IFS.");

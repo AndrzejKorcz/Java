@@ -32,6 +32,7 @@ public class ArgsParserTest {
                 .action(new Option(ACTION, "action", true, "action on IBMi IFS"))
                 .local(new Option(LOCAL, "local", true, "path to local"))
                 .remote(new Option(REMOTE, "remote", true, "path to remote"))
+                .clean(new Option("c", "clean", false, "clean objects on IBMi IFS"))
                 .build();
     }
 
@@ -75,24 +76,10 @@ public class ArgsParserTest {
     }
 
     @Test
-    public void shouldAnswerWithActionCpyFromIfsEquals() throws IOException {
-        String[] args = {ACTION_, "cpyFromIfs", LOCAL_, LOCAL_PATH, REMOTE_, IFS_PATH};
-        argsParser.parseArgs(args);
-        assertEquals(EnumParams.Action.CPYFROMIFS, argsParser.getEnumAction());
-    }
-
-    @Test
     public void optionsNotNull() throws IOException {
         String[] args = {};
         argsParser.parseArgs(args);
         assertNotNull("Verify that argsParser options is NOT null", argsParser.getOptions());
-    }
-
-    @Test
-    public void optionActionNotNull() throws IOException {
-        String[] args = {ACTION_, EnumParams.Action.CPYFROMIFS.toString()};
-        argsParser.parseArgs(args);
-        assertNotNull("Verify that argsParser options is NOT null", argsParser.getAction());
     }
 
     @Test

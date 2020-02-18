@@ -48,6 +48,13 @@ public class As400ifs {
         return writer;
     }
 
+    public  void deleteIFS() throws IOException {
+        for (String ifsFilePathName : ifsFilePathNames) {
+            IFSFile ifsFile = new IFSFile(as400Connection.getAs400(), ifsFilePathName);
+            ifsFile.delete();
+        }
+    }
+
     public void writeIFS() throws IOException {
         int i = 0;
         for (String localFilePathName: localFilePathNames) {
@@ -69,7 +76,7 @@ public class As400ifs {
     }
 
     @NotNull
-    private String readFileString(AS400 system, String path) throws AS400SecurityException, IOException {
+    private String readFileString(AS400 system, String path, boolean cleanUp) throws AS400SecurityException, IOException {
         IFSFile ifsFile = new IFSFile(system, path);
         try(IFSFileReader fr = new IFSFileReader (ifsFile);
             BufferedReader br = new BufferedReader(fr)) {
@@ -80,12 +87,14 @@ public class As400ifs {
                 sb.append(System.getProperty("line.separator"));
                 line = br.readLine();
             }
+            if (cleanUp) ifsFile.delete();
+
             return sb.toString();
         }
     }
 
     @NotNull
-    private byte[] readFileByte(AS400 system, String path) throws AS400SecurityException,
+    private byte[] readFileByte(AS400 system, String path, boolean cleanUp) throws AS400SecurityException,
             IOException{
         IFSFile file = new IFSFile(system, path);
         /** creates a file input stream */
@@ -93,22 +102,22 @@ public class As400ifs {
             byte[] data = new byte[fis.available()];
             int count = 0;
             while((count = fis.read(data)) > 0) {
-                LogFile.writeLog(Level.WARNING, "Should never happen!");
+                LogFile.writeLog(Level.FINE, "Data were downloaded from IFS.");
             }
-
+            if (cleanUp) file.delete();
             return data;
         }
     }
 
-    public void readIFS(EnumParams.Action enumAction) throws IOException, AS400SecurityException {
+    public void readIFS(EnumParams.Action enumAction, boolean cleanUp) throws IOException, AS400SecurityException {
         int i = 0;
         for (String ifsFilePathName : ifsFilePathNames) {
             try (FileOutputStream fos = new FileOutputStream(localFilePathNames[i])) {
                 if (enumAction == EnumParams.Action.CPYTXTFROMIFS) {
-                    fos.write(readFileString(as400Connection.getAs400(), ifsFilePathName).getBytes());
+                    fos.write(readFileString(as400Connection.getAs400(), ifsFilePathName, cleanUp).getBytes());
                 }
                 if (enumAction == EnumParams.Action.CPYBYTEFROMIFS) {
-                    fos.write(readFileByte(as400Connection.getAs400(), ifsFilePathName));
+                    fos.write(readFileByte(as400Connection.getAs400(), ifsFilePathName, cleanUp));
                 }
             }
             LogFile.writeLog(Level.FINE, "The contents of the IFS file: " + ifsFilePathName + " were written to the local file: " + localFilePathNames[i]);
