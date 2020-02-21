@@ -47,7 +47,7 @@ public class As400SbmCommand {
             if (!job.isEmpty()) {
                 jobStatus = getJobStatus(job);
                 LogFile.writeLog(Level.INFO, "Job: " + job + " status: " + jobStatus);
-                if (jobStatus.equals("*OUTQ")) throw new IllegalArgumentException("Job in *OUTQ");
+                if (jobStatus.equals(Job.ACTIVE_JOB_STATUS_WAIT_MESSAGE)) throw new IllegalArgumentException("Job in *MSGW");
             }
             //Show help text.
             String helpText = messageList[i].getHelp();
