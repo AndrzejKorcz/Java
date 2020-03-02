@@ -2,8 +2,13 @@ package com.standalone.utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ibm.debug.pdt.codecoverage.core.results.CCResultException;
 import com.ibm.debug.pdt.codecoverage.core.results.CCResultsFactory;
 import com.ibm.debug.pdt.codecoverage.core.results.ICCFile;
@@ -19,7 +24,8 @@ public class App
 
         ArgsParser argsParser = ArgsParser.builder()
                 .ccFile(new Option("f", "file", true, "path to cc file"))
-                .percent(new Option("p", "percent", true, "percent"))
+                .percent(new Option("p", "percent", true, "acceptable coverage percentage"))
+                .archive(new Option("s", "archive", true, "archive flag"))
                 .build();
 
         if (!argsParser.parseArgs(args)) {
@@ -31,19 +37,33 @@ public class App
         }
 
         ICCResult results = null;
+        Map<String, Object> map = new HashMap<>();
         try {
             results = CCResultsFactory.getInstance().createResult(new String[]{argsParser.getFileNamePath()});
-            LogFile.writeLog(Level.INFO, "Percentage code coverage: " + results.getPercentCoverage());
+
+            int percentCoverage = results.getPercentCoverage();
+            map.put("percentCoverage", percentCoverage);
+
+            LogFile.writeLog(Level.INFO, "Percentage code coverage: " + percentCoverage);
 
             LogFile.writeLog(Level.INFO,"Objects covered: ");
             ICCFile[] iccFiles = results.getFiles();
+            List<String> list = new ArrayList<>();
             for (ICCFile iccFile : iccFiles) {
+                list.add(iccFile.getName());
                 LogFile.writeLog(Level.INFO, iccFile.getName());
             }
+            map.put("coveredObjects", list);
 
             if( (argsParser.getPercentGate() != null) && (!argsParser.getPercentGate().isEmpty()) &&
                 (results.getPercentCoverage() < Integer.parseInt(argsParser.getPercentGate())) )
                     System.exit(1);
+
+            String archivePath = argsParser.getArchivePath();
+            if (!isNullOrEmpty(archivePath)) {
+                ObjectMapper mapper = new ObjectMapper();
+                mapper.writeValue(new File(archivePath), map);
+            }
 
         } catch (CCResultException e) {
             endProgramWithError("Invalid code coverage data. Error message: " + e.getMessage());
@@ -58,9 +78,13 @@ public class App
         System.exit(1);
     }
 
-        private static boolean validFile(String fileName) {
-            File file = new File(fileName);
-            return (file.exists() && file.isFile());
+    private static boolean validFile(String fileName) {
+        File file = new File(fileName);
+        return (file.exists() && file.isFile());
+    }
+
+    private static boolean isNullOrEmpty(String str) {
+        return !(str != null && !str.isEmpty());
     }
 
 }

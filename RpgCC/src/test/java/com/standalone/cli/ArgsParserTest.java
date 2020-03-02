@@ -12,10 +12,12 @@ public class ArgsParserTest {
 
     private static final String FILE = "f";
     private static final String PERCENT = "p";
+    private static final String ARCHIVE =  "s";
 
     private static final String HYPHEN = "-";
     private static final String FILE_ = HYPHEN + FILE;
     private static final String PERCENT_ = HYPHEN + PERCENT;
+    private static final String ARCHIVE_  = HYPHEN + ARCHIVE;
 
     private static ArgsParser argsParser;
 
@@ -24,6 +26,7 @@ public class ArgsParserTest {
         argsParser = ArgsParser.builder()
                 .ccFile(new Option(FILE, "file", true, "path to cc file"))
                 .percent(new Option(PERCENT, "percent", true, "percent"))
+                .archive(new Option(ARCHIVE, "archive", true, "archive flag"))
                 .build();
     }
 
@@ -82,6 +85,20 @@ public class ArgsParserTest {
         String[] args = {FILE_, "path_to_file"};
         argsParser.parseArgs(args);
         assertNotNull( "CC file parameter are not null", argsParser.getOptions() );
+    }
+
+    @Test
+    public void shouldAnswerWithNotNullForArchive() throws IOException {
+        String[] args = {FILE_, "path_to_file", ARCHIVE_};
+        argsParser.parseArgs(args);
+        assertNotNull( "Archive flag parameter are not null", argsParser.getArchive() );
+    }
+
+    @Test
+    public void shouldAnswerWithTrueForArchiveFlag() throws IOException {
+        String[] args = {FILE_, "path_to_file", ARCHIVE_, "path_to_archive"};
+        argsParser.parseArgs(args);
+        assertTrue("Archive flag should be true", !argsParser.getArchivePath().isEmpty());
     }
 
 }

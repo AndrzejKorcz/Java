@@ -18,9 +18,11 @@ public class ArgsParser {
 
     private Option ccFile;
     private Option percent;
+    private Option archive;
 
     private String fileNamePath;
     private String percentGate;
+    private String archivePath;
 
     private void setUpOptions() {
         options = new Options();
@@ -30,6 +32,9 @@ public class ArgsParser {
 
         percent.setRequired(NOT_REQUIRED);
         options.addOption(percent);
+
+        archive.setRequired(NOT_REQUIRED);
+        options.addOption(archive);
 
     }
 
@@ -54,7 +59,7 @@ public class ArgsParser {
     private boolean processCommand(CommandLine cmd) {
         fileNamePath = cmd.getOptionValue("file");
         percentGate = cmd.getOptionValue("percent");
-        
+        archivePath = cmd.getOptionValue("archive");
         return true;
     }
 }
