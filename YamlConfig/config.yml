@@ -1,5 +1,0 @@
-# Connection parameters
-connection:
-  hostName: HOST
-  userId: USER
-  password: PASSWORD

@@ -1,1 +1,0 @@
-COPY ".\target\as400SbmCommandCall-1.0-SNAPSHOT-jar-with-dependencies.jar" "d:\DevOps\bin\jar\ibmisbmcmd.jar"

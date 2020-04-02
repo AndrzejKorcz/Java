@@ -1,1 +1,0 @@
-COPY ".\target\integratedfilesystem-1.0-jar-with-dependencies.jar" "d:\DevOps\bin\jar\ibmiifs.jar"

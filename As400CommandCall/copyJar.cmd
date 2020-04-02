@@ -1,1 +1,0 @@
-COPY ".\target\as400CommandCall-1.0-jar-with-dependencies.jar" "d:\DevOps\bin\jar\ibmicmd.jar"
