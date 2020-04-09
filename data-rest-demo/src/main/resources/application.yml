@@ -1,9 +1,0 @@
-spring.datasource:
-  url: jdbc:as400://[ibm_i_ip_address];naming=system;libraries=BOOTTEST;socket timeout=30000;thread used=false;transaction isolation=read commited;translate binary=true;date format=iso;prompt=false
-  username: [db2_for_i_database_username]
-  driver-class-name: com.ibm.as400.access.AS400JDBCDriver
-  hikari.connection-test-query: values 1
-
-spring.jpa:
-  database-platform: org.hibernate.dialect.DB2400Dialect
-  hibernate.ddl-auto: none
